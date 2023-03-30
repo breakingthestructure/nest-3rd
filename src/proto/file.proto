@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package file;
+
+service FileService {
+  rpc PostUploadImage (FileRequest) returns (Response) {}
+  rpc GetExportTimeOff (ExportRequest) returns (Response) {}
+}
+
+message FileRequest {
+  string name = 1;
+  string extension = 2;
+  int32 size = 3;
+  bytes buffer = 4;
+}
+
+message Response {
+  int32 status = 1;
+  string message = 2;
+  string data = 3;
+}
+
+message ExportRequest {
+  ExportColumnTimeOffList columns = 1;
+  repeated FindOneTimeOffList data = 2;
+  string start_date = 3;
+  string end_date = 4;
+}
+
+message FindOneTimeOffList {
+  int32 id = 1;
+  int32 user_id = 2;
+  string type_name = 3;
+  string reason = 5;
+  string start_date = 6;
+  string end_date = 7;
+  int32 approver_id = 8;
+  string approved_at = 9;
+  int32 status = 10;
+  string created_at = 11;
+  string updated_at = 12;
+  int32 session = 13;
+  int32 duration = 14;
+  string name_request = 15;
+  string name_approve = 16;
+  string code_request = 17;
+  int32 has_money = 18;
+  int32 no_money = 19;
+  int32 number_of_day = 20;
+  string position_name = 21;
+  string department_name = 22;
+  string division_name = 23;
+  double hours = 24;
+}
+
+message ExportColumnTimeOffList {
+  string name = 1;
+  string code = 2;
+  string division_name = 3;
+  string department_name = 4;
+  string position_name = 5;
+  string start_date = 6;
+  string number_of_day = 7;
+  string type_name = 8;
+  string reason = 9;
+  string no_money = 10;
+  string has_money = 11;
+}

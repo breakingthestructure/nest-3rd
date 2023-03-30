@@ -1,0 +1,21 @@
+stages:
+  - deploy
+
+variables:
+  GIT_STRATEGY: clone
+
+dev-deploy:
+  stage: deploy
+  only:
+    - dev
+  tags:
+    - dev
+  script:
+    - cd /opt/codes/eportal/core-service
+    - sudo git fetch
+    - sudo git checkout .
+    - sudo git checkout $CI_COMMIT_SHORT_SHA
+    - sudo npm i
+    - sudo pm2 restart eportal-core
+
+
